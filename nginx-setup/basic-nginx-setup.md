@@ -24,7 +24,7 @@ This project focuses on customizing an NGINX server using Docker, making it idea
   - Instead of using the latest tag, it is recommended to use a specific version (`1.27.0`) for stability. 
   - The latest tag changes as new versions are released, which can cause incompatibility issues.
 - **Pulling the NGINX Image**
-  - Use docker pull `nginx:1.27.0` to download the exact version. 
+  - Use `docker pull nginx:1.27.0` to download the exact version. 
   - Verify the download using docker images.
 - **Running the NGINX Container**
   - Execute docker run with key options:
@@ -39,3 +39,33 @@ This project focuses on customizing an NGINX server using Docker, making it idea
   - The container is running successfully, but more configurations will be explored in the upcoming lessons.
 
 To ensure stability, it is best to use a specific version of the **NGINX** image (1.27.0) instead of relying on the latest tag, which can change over time and cause incompatibilities. The image can be pulled using `docker pull nginx:1.27.0` and verified with docker images. To run the container, use `docker run -d -p 80:80 --name web_server nginx:1.27.0`, ensuring it runs in detached mode with proper port mapping and a custom name. Without specifying a version, Docker defaults to the latest, potentially leading to unexpected behavior. Once the container is running, `docker ps` confirms its status, and curl localhost verifies the NGINX response. With the basic setup complete, more configurations will follow in the next lessons.
+
+# Customizing Content Inside the NGINX Container
+
+- **Starting and Accessing the NGINX Container**
+  - Verify if the container is running using `docker ps`. 
+  - If it is stopped, restart it using `docker start web_server`. 
+  - Use `docker exec -it web_server sh` to open an interactive shell inside the container.
+
+- **Installing Vim and Accessing the HTML File**
+  - By default, **_Vim_** is not installed in the NGINX container. 
+  - Install it using apt-get update followed by `apt-get install vim`. 
+  - Locate the `index.html` file at `/usr/share/nginx/html/index.html`. 
+
+- Editing the HTML File with Vim
+  - Open the file in **_Vim_** using vim `/usr/share/nginx/html/index.html`. 
+  - Use **_Vim_** commands to edit the content:
+    - `9dd` to delete nine lines. 
+    - `i` to enter insert mode, modify the message, and then save with `:wq`. 
+  
+- **Verifying the Changes** 
+  - Run `cat /usr/share/nginx/html/index.html` to check if the content was updated.
+  - Use `curl localhost` to confirm the changes.
+  - If the browser still shows the old content, clear cache or rely on `curl`. 
+
+- **Next Steps**
+  - The project demonstrates modifying container files and installing packages.
+  - Further discussions on limitations and improvements will follow in the next lesson.
+
+To ensure the **NGINX** container is running, check with `docker ps` and restart it if necessary. Use `docker exec -it web_server sh` to enter the container. Since `Vim` is not pre-installed, update the package list with `apt-get update` and install `Vim` using `apt-get install vim`. The `index.html` file, located at `/usr/share/nginx/html/index.html`, can be modified by opening it in `Vim` (`vim /usr/share/nginx/html/index.html`). Use commands like 9dd to delete multiple lines and `i` to enter insert mode and edit the text. Save changes with `:wq` and verify using `cat` or `curl localhost`. If the browser still displays the old content, clear the cache or rely on curl. This project highlights how to modify container files and install packages, with further discussions on improvements in the next lesson.
+         
