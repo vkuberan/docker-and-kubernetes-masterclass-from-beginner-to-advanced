@@ -35,10 +35,10 @@ This project focuses on customizing an NGINX server using Docker, making it idea
 - **Verifying the Running Container**
   - Use `docker ps` to confirm the container is active. 
   - Test accessibility with `curl localhost`, which should return a response from the running **NGINX** server. 
-- Next Steps 
+- **Next Steps**
   - The container is running successfully, but more configurations will be explored in the upcoming lessons.
 
-To ensure stability, it is best to use a specific version of the **NGINX** image (1.27.0) instead of relying on the latest tag, which can change over time and cause incompatibilities. The image can be pulled using `docker pull nginx:1.27.0` and verified with docker images. To run the container, use `docker run -d -p 80:80 --name web_server nginx:1.27.0`, ensuring it runs in detached mode with proper port mapping and a custom name. Without specifying a version, Docker defaults to the latest, potentially leading to unexpected behavior. Once the container is running, `docker ps` confirms its status, and curl localhost verifies the NGINX response. With the basic setup complete, more configurations will follow in the next lessons.
+To ensure stability, it is best to use a specific version of the `NGINX` image (`1.27.0`) instead of relying on the latest tag, which can change over time and cause incompatibilities. The image can be pulled using `docker pull nginx:1.27.0` and verified with docker images. To run the container, use `docker run -d -p 80:80 --name web_server nginx:1.27.0`, ensuring it runs in detached mode with proper port mapping and a custom name. Without specifying a version, Docker defaults to the latest, potentially leading to unexpected behavior. Once the container is running, `docker ps` confirms its status, and `curl localhost` verifies the `NGINX` response. With the basic setup complete, more configurations will follow in the next lessons.
 
 # Customizing Content Inside the NGINX Container
 
@@ -46,23 +46,19 @@ To ensure stability, it is best to use a specific version of the **NGINX** image
   - Verify if the container is running using `docker ps`. 
   - If it is stopped, restart it using `docker start web_server`. 
   - Use `docker exec -it web_server sh` to open an interactive shell inside the container.
-
 - **Installing Vim and Accessing the HTML File**
   - By default, **_Vim_** is not installed in the NGINX container. 
   - Install it using apt-get update followed by `apt-get install vim`. 
-  - Locate the `index.html` file at `/usr/share/nginx/html/index.html`. 
-
+  - Locate the `index.html` file at `/usr/share/nginx/html/index.html`.
 - Editing the HTML File with Vim
   - Open the file in **_Vim_** using vim `/usr/share/nginx/html/index.html`. 
   - Use **_Vim_** commands to edit the content:
     - `9dd` to delete nine lines. 
-    - `i` to enter insert mode, modify the message, and then save with `:wq`. 
-  
+    - `i` to enter insert mode, modify the message, and then save with `:wq`.
 - **Verifying the Changes** 
   - Run `cat /usr/share/nginx/html/index.html` to check if the content was updated.
   - Use `curl localhost` to confirm the changes.
-  - If the browser still shows the old content, clear cache or rely on `curl`. 
-
+  - If the browser still shows the old content, clear cache or rely on `curl`.
 - **Next Steps**
   - The project demonstrates modifying container files and installing packages.
   - Further discussions on limitations and improvements will follow in the next lesson.
